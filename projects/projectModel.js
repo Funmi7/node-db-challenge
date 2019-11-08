@@ -4,11 +4,18 @@ const mappers = require('./mappers');
 module.exports = {
     get,
     getById,
-    add,
+    add
 }
 
 function get() {
-    return db('projects')
+  return db("projects").then(projects =>
+    projects.map(project => {
+      return {
+        ...project,
+        completed: mappers.convertBoolean(project.completed)
+      };
+    })
+  );
 }
 
 function getById(id) {
@@ -24,3 +31,6 @@ function add(project) {
         return getById(ids[0]);
     });
 }
+
+
+
