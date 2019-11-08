@@ -1,16 +1,12 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const projectRouter = require('./projects/project-router');
+const projectRouter = require('./projects/projectRouter');
 
 const server = express();
 
 server.use(helmet());
 server.use(express.json());
-
-// server.get('/', (req, res) => {
-//     res.send('server running')
-// })
 
 server.use('/api/projects', projectRouter)
 
